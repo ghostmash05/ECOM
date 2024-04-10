@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    font-family: 'Montserrat';
+    background-color: #353b57;
+}
+
+.nav-left{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left:15px;
+    margin-left: 10px;
+}
+
+.nav-left a {
+    text-decoration: none;
+    color: #353b57;
+    margin-right: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.nav-right {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-right: 5px;
+    margin-right: 10px;
+    position: fixed;
+    top: 2vh;
+    right: 8vw;
+}
+
+.nav-right a {
+    font-size: 28px;
+    color: whitesmoke;
+    margin-left: 25px;
+}
+
+.color{
+    height: 100vh;
+    width: 70vw;
+    background-color: whitesmoke;
+    z-index: 0;
+    margin-left: 90px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    height: 50vh;
+    width: 50vw;
+    position: absolute;
+    top: 20%;
+    left: 90px;
+    margin-left: 10px;
+    padding-left: 15px;
+}
+
+.content h1 {
+    font-size: 70px;
+    font-weight: 600;
+    color: #FAA300;
+    padding-top: 10px;
+}
+
+.content h3 {
+    font-size: 25px;
+    font-weight: 500;
+    color: gray;
+    padding-top: 30px;
+    padding-left: 5px;
+}
+
+.content p {
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    padding-top: 30px;
+    padding-left: 5px;
+    width: 50%;
+}
+
+.social-media {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    align-items: center;
+    margin-top: 20px;
+    padding-left: 5px;
+}
+
+.social-media a {
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+    margin-right: 30px;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: right;
+    margin-top: 20px;
+    padding-left: 5px;
+    writing-mode: vertical-rl;
+    position: fixed;
+    top: 5vh;
+    right: 2vw;
+}
+
+.item h1 {
+    text-decoration: none;
+    color: darkgray;
+    font-size: 55px;
+    font-weight: 900;
+    font-family: 'Poppins';
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding-left: 5px;
+    position: fixed;
+    top: 15%;
+    right: 10%;
+    height: 50vh;
+    width: 50vw;
+}
+
+.image img {
+    scale: 1.8;
+    rotate: -25deg;
+}
+
+.price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    position: fixed;
+    top: 80%;
+    right: 20%;
+    z-index: 1;
+    border-radius: 10px;
+    box-shadow: #353b57 0px 0px 15px;
+    background-color: aliceblue;
+    height: 150px;
+    width: 150px;
+}
+
+.price h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+    margin-bottom: 10px;
+    text-decoration: line-through;
+}
+
+.price h2 {
+    font-size: 35px;
+    font-weight: 600;
+    color: #FAA300;
+    margin-bottom: 20px;
+}
+
+.cart button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    padding-left: 30px;
+    top: 88%;
+    right: 8%;
+    z-index: 0;
+    border-radius: 10px;
+    box-shadow: black 0px 0px 10px;
+    background-color: #FAA300;
+    height: 70px;
+    width: 230px;
+    font-family: 'Poppins';
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+
+    ion-icon {
+        font-size: 30px;
+    }
+}
