@@ -3,7 +3,9 @@
 
 if ( isset($_GET["action"]) && isset($_POST)){
 
-    echo json_encode(['200'=>'Got it']);
+    $email = mysqli_escape_string($conn,) 
+
+    echo json_encode(['status'=>'ok']);
 
 }
 
