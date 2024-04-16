@@ -9,7 +9,7 @@
         <div class="mb-4">
          
           
-            <p class="mb-4 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-3 font-md" style="display:none" id="alert_msg"> </p>
+            <p class="mb-4  border-l-4   p-3 font-md" style="display:none" id="login_alert_msg"> </p>
             
           
 
@@ -46,17 +46,17 @@
 
       <div class="mt-8 mb-4 flex items-center justify-between">
         <div class="flex items-center">
-          <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+          <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-yellow-600 focus:ring-indigo-600">
           <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-900">Remember me</label>
         </div>
 
         <div class="text-sm leading-6">
-          <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
+          <a href="#" class="font-semibold text-yellow-600 hover:text-indigo-500">Forgot password?</a>
         </div>
       </div>
 
       <div>
-        <button type="submit" id="singin_btn" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-3 text-md font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+        <button type="submit" id="singin_btn" class="flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-md font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
       </div>
 
       
@@ -64,7 +64,7 @@
 
     <p class="mt-4 text-center text-sm leading-6 text-gray-500">
       Not a member?
-      <a href="#" id ="singup_now" class="font-semibold text-indigo-600 hover:text-indigo-500">Signup Now </a>
+      <a href="#" id ="singup_now" class="font-semibold text-yellow-600 hover:text-indigo-500">Signup Now </a>
     </p>
 </div>
 </div>
@@ -168,7 +168,7 @@
 </div>
 
       <div>
-        <button id ="singup_btn" type="submit" class="mt-10 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-3 text-sm font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Signup</button>
+        <button id ="singup_btn" type="submit" class="mt-10 flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-sm font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Signup</button>
       </div>
 
       
@@ -176,7 +176,7 @@
 
     <p class="mt-4 text-center text-sm leading-6 text-gray-500">
       Already a member?
-       <button id ="login_now"  class="font-semibold text-indigo-600 hover:text-indigo-500">Login  Now </button>
+       <button id ="login_now"  class="font-semibold text-yellow-600 hover:text-indigo-500">Login  Now </button>
      </p>
 </div>
 
@@ -223,7 +223,30 @@ $.ajax({
   success:function(data){
     
     
-    console.log(JSON.stringify(data));
+    var data = JSON.parse(JSON.stringify(data));
+
+    console.log(data);
+
+    if (data["status"]==="error"){
+  
+      $("#login_alert_msg").removeClass("bg-green-100 border-green-500 text-green-700");
+
+      $("#login_alert_msg").addClass("bg-orange-100 border-orange-500 text-orange-700");
+      $("#login_alert_msg").show();
+
+      $("#login_alert_msg").html(data["msg"]);
+      
+
+
+    }
+
+    else{
+      $("#login_alert_msg").removeClass("bg-orange-100 border-orange-500 text-orange-700");
+
+      $("#login_alert_msg").addClass("bg-green-100 border-green-500 text-green-700");
+      $("#login_alert_msg").show();
+      $("#login_alert_msg").html(data["msg"]);
+    }
 
 
   }
