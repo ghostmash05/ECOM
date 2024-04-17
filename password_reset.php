@@ -25,18 +25,18 @@ if(isset($_GET["token"]) && isset($_GET["email"] )){
    
       
       if(!isset($_POST["password"])  ||  $_POST["password"]==="" ){
-            $msg = "Sorry, your pasword is empty";
+            $msg = "<p class='mb-4  border-l-4   p-3 font-md bg-orange-100 border-orange-500 text-orange-700'>Sorry, your pasword is empty </p>";
     }
 
     elseif(!isset($_POST["cnf_password"])  ||  $_POST["cnf_password"]==="" ){
-        $msg = "Sorry, your Confirm password is empty";
+        $msg = "<p class='mb-4  border-l-4   p-3 font-md bg-orange-100 border-orange-500 text-orange-700'> Sorry, your Confirm password is empty </p>";
 }
 
 
     
 
     elseif(!isset($_POST["password"]) || $_POST["cnf_password"]==="" ){
-        $msg = "Sorry, your pasword and confirm password does not match";
+        $msg = "<p class='mb-4  border-l-4   p-3 font-md bg-orange-100 border-orange-500 text-orange-700'> Sorry, your pasword and confirm password does not match </p>";
         
 
     }
@@ -49,12 +49,12 @@ if(isset($_GET["token"]) && isset($_GET["email"] )){
        
         if($sql_email_check.execute()){
 
-            $msg = "Your password has been updated. Please login Now ";
+            $msg = "<p class='mb-4  border-l-4   p-3 font-md bg-green-100 border-green-500 text-green-700'> Your password has been updated. Please login . </p> ";
         }
 
         else{
 
-            $msg = "Sorry, something went wrong. ";
+            $msg = "<p class='mb-4  border-l-4   p-3 font-md bg-orange-100 border-orange-500 text-orange-700'> Sorry, something went wrong. </p>";
         }
        
      
@@ -63,13 +63,13 @@ if(isset($_GET["token"]) && isset($_GET["email"] )){
 }
     }
     else{
-      $msg = "Sorry, The Pasword Reset link is invalid or expired.";
+      $msg = "<p class='mb-4  border-l-4   p-3 font-md bg-orange-100 border-orange-500 text-orange-700'>  Sorry, The Pasword Reset link is invalid or expired. </p>";
     }
 
 }
 
 else{
-    $msg = "Sorry Invalid Link ";
+    $msg = "<p class='mb-4  border-l-4   p-3 font-md bg-orange-100 border-orange-500 text-orange-700'> Sorry Invalid Link.  </p> ";
 }
 
 
