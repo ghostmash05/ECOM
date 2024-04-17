@@ -277,64 +277,7 @@ function req_password_reset(){
 }
 
 
-function reset_password(){
-    $token = mysqli_real_escape_string($conn, $_GET["token"]);
-    $email = mysqli_real_escape_string($conn, $_GET["email"]);
-    $password = mysqli_real_escape_string($conn, $_POST["password"]);
-    $cnf_password = mysqli_real_escape_string($conn, $_POST["cnf_password"]);
-    
 
-    $sql_token_check = $conn->prepare("SELECT * from users WHERE email = ? and token = ? and token_expire > NOW()");
-    $sql_email_check->bind_param("ss", $email, $token);
-    $sql_email_check.execute();
-    $res_email_check = $sql_email_check->get_result();
-
-    if ($res_email_check->num_rows>0){
-    
-   
-      
-      if(!isset($_POST["password"])  ||  $_POST["password"]==="" ){
-            $msg = "Sorry, your pasword is empty";
-    }
-
-    elseif(!isset($_POST["cnf_password"])  ||  $_POST["cnf_password"]==="" ){
-        $msg = "Sorry, your Confirm password is empty";
-}
-
-
-    
-
-    elseif(!isset($_POST["password"]) || $_POST["cnf_password"]==="" ){
-        $msg = "Sorry, your pasword and confirm password does not match";
-        
-
-    }
-
-     else{
-        $password = md5($password);
-
-        $sql_update_password = $conn->prepare("UPDATE `users` SET `password` = ? WHERE email = ? ");
-        $sql_email_check->bind_param("ss", $password, $email);
-       
-        if($sql_email_check.execute()){
-
-            $msg = "Your password has been updated. Please login Now ";
-        }
-       
-     
-    
-    }
-    }
-    else{
-      $msg = "Sorry, The Pasword Reset link is invalid or expired.";
-    }
-
-}
-
-function verify_password(){
-
-
-}
 
 
   
@@ -350,6 +293,12 @@ if ( isset($_GET["action"]) && isset($_POST)){
     elseif($_GET["action"]=="register"){
         
         $json_out = register($conn);
+        echo $json_out;
+    }
+
+    elseif($_GET["action"]=="forgot_password"){
+        
+        $json_out = req_password_reset($conn);
         echo $json_out;
     }
 
