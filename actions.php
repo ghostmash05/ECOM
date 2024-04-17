@@ -297,6 +297,12 @@ if ( isset($_GET["action"]) && isset($_POST)){
         echo $json_out;
     }
 
+    elseif($_GET["action"]=="forgot_password"){
+
+        $json_out = req_password_reset($conn);
+        echo $json_out;
+    }
+
  
 
 
