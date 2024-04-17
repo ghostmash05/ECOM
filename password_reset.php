@@ -2,13 +2,13 @@
 include_once "components/header.php" ;
 
 
-
+$msg = "";
 if(isset($_GET["token"]) && isset($_GET["email"] )){
 
     $token = mysqli_real_escape_string($conn, $_GET["token"]);
     $email = mysqli_real_escape_string($conn, $_GET["email"]);
 
-    $msg = "";
+    
     
     
 
@@ -68,6 +68,10 @@ if(isset($_GET["token"]) && isset($_GET["email"] )){
 
 }
 
+else{
+    $msg = "Sorry Invalid Link ";
+}
+
 
 
 
@@ -90,7 +94,7 @@ if(isset($_GET["token"]) && isset($_GET["email"] )){
     <form  class="space-y-6" action="password_reset.php" method="POST">
         
          <div class="mb-4">
-         
+            <?= $msg;?>
           <div class="relative mt-2 rounded-md shadow-sm">
             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-400">
