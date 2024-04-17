@@ -231,6 +231,112 @@ function register($conn){
 
 
 
+function req_password_reset(){
+
+    if($_POST["email"] || $_POST["email"]===""){
+        $json = json_encode(array(
+            "status"=>"error",
+            "msg"=>"Sorry, Please provide an email address to reset password."
+        ));
+    }
+
+    $email = mysqli_escape_string($conn, $_REQUEST["email"]);
+
+    $find_user_sql = $conn->prepare("SELECT * from users WHERE email = ?");
+    $find_user_sql->bind_param("s", $email);
+    $find_user_sql->execute();
+    $user_sql_res = $find_user_sql->get_result();
+
+    if($user_sql_res->num_rows>0){
+     
+        $random_bytes = random_bytes(20);
+        $token = bin2hex($random_bytes);
+        $sql_token = "UPDATE users SET token=$token WHERE email=$email and token_expire = DATE_ADD(NOW(),INTERVAL 15 MINUTE)";
+        mysqli_query($conn, $sql_token);
+
+        password_reset_mail($email);
+        
+        $json = json_encode(array(
+            "status"=>"success",
+            "msg"=>"An mail with password reset instruction has been sent to your email. "
+        ));
+        return json;
+
+
+          
+
+    }
+    else{
+        $json = json_encode(array(
+            "status"=>"error",
+            "msg"=>"Sorry, No user with that email address has been found."
+        ));
+        return json;
+
+    }
+}
+
+
+function reset_password(){
+    $token = mysqli_real_escape_string($conn, $_GET["token"]);
+    $email = mysqli_real_escape_string($conn, $_GET["email"]);
+    $password = mysqli_real_escape_string($conn, $_POST["password"]);
+    $cnf_password = mysqli_real_escape_string($conn, $_POST["cnf_password"]);
+    
+
+    $sql_token_check = $conn->prepare("SELECT * from users WHERE email = ? and token = ? and token_expire > NOW()");
+    $sql_email_check->bind_param("ss", $email, $token);
+    $sql_email_check.execute();
+    $res_email_check = $sql_email_check->get_result();
+
+    if ($res_email_check->num_rows>0){
+    
+   
+      
+      if(!isset($_POST["password"])  ||  $_POST["password"]==="" ){
+            $msg = "Sorry, your pasword is empty";
+    }
+
+    elseif(!isset($_POST["cnf_password"])  ||  $_POST["cnf_password"]==="" ){
+        $msg = "Sorry, your Confirm password is empty";
+}
+
+
+    
+
+    elseif(!isset($_POST["password"]) || $_POST["cnf_password"]==="" ){
+        $msg = "Sorry, your pasword and confirm password does not match";
+        
+
+    }
+
+     else{
+        $password = md5($password);
+
+        $sql_update_password = $conn->prepare("UPDATE `users` SET `password` = ? WHERE email = ? ");
+        $sql_email_check->bind_param("ss", $password, $email);
+       
+        if($sql_email_check.execute()){
+
+            $msg = "Your password has been updated. Please login Now ";
+        }
+       
+     
+    
+    }
+    }
+    else{
+      $msg = "Sorry, The Pasword Reset link is invalid or expired.";
+    }
+
+}
+
+function verify_password(){
+
+
+}
+
+
   
 if ( isset($_GET["action"]) && isset($_POST)){
   
