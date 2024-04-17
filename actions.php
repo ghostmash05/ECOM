@@ -62,7 +62,7 @@ function login_checker($conn){
 }
 
 function register($conn){
-    if(!isset($_REQUEST["full_name"])){
+    if(!isset($_REQUEST["full_name"]) || $_REQUEST["full_name"]===""){
      
         $json = json_encode(array(
             "status" => "error",
@@ -72,7 +72,7 @@ function register($conn){
      
     }
 
-    if(!isset($_POST["email"])){
+    if(!isset($_POST["email"]) || $_POST["email"] ==="" ){
      
         $json = json_encode(array(
             "status" => "error",
@@ -81,7 +81,7 @@ function register($conn){
         return $json;
      
     }
-    if(!isset($_POST["username"])){
+    if(!isset($_POST["username"]) || $_POST["username"]==="")  {
         $json= json_encode(array(
             "status"=>"error",
             "msg"=>"Sorry, please enter a username. ",
@@ -92,7 +92,7 @@ function register($conn){
 
     }
 
-    if(!isset($_REQUEST["password"])){
+    if(!isset($_REQUEST["password"])  ||  $_REQUEST["password"]===""  ){
         $json= json_encode(array(
             "status"=>"error",
             "msg"=>"Sorry, please enter a password. ",
@@ -105,7 +105,7 @@ function register($conn){
 
     
 
-    if(!isset($_REQUEST["cnf_password"])){
+    if(!isset($_REQUEST["cnf_password"]) || $_REQUEST["cnf_password"]==="" ){
         $json= json_encode(array(
             "status"=>"error",
             "msg"=>"Sorry, please enter password in confirm password field to confirm . ",
@@ -116,7 +116,7 @@ function register($conn){
 
     }
 
-    if(!isset($_REQUEST["phone"])){
+    if(!isset($_REQUEST["phone"])  || $_REQUEST["phone"]===""){
         $json= json_encode(array(
             "status"=>"error",
             "msg"=>"Sorry, please provide a phone number. ",
