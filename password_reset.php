@@ -13,13 +13,13 @@ if(isset($_GET["token"]) && isset($_GET["email"] )){
     
 
     $sql_token_check = $conn->prepare("SELECT * from users WHERE email = ? and token = ? and token_expire > NOW()");
-    $sql_email_check->bind_param("ss", $email, $token);
-    $sql_email_check.execute();
-    $res_email_check = $sql_email_check->get_result();
+    $sql_token_check->bind_param("ss", $email, $token);
+    $sql_token_check->execute();
+    $res_token_check = $sql_token_check->get_result();
 
-    if ($res_email_check->num_rows>0){
+    if ($res_token_check->num_rows>0){
 
-    if(isset($_POST)){ 
+    if(isset($_POST["password"])){ 
         $password = mysqli_real_escape_string($conn, $_POST["password"]);
         $cnf_password = mysqli_real_escape_string($conn, $_POST["cnf_password"]);
    
@@ -45,9 +45,15 @@ if(isset($_GET["token"]) && isset($_GET["email"] )){
         $password = md5($password);
 
         $sql_update_password = $conn->prepare("UPDATE `users` SET `password` = ? WHERE email = ? ");
-        $sql_email_check->bind_param("ss", $password, $email);
+        $sql_update_password->bind_param("ss", $password, $email);
        
-        if($sql_email_check.execute()){
+        if($sql_update_password->execute()){
+
+            $sql_remove_token = $conn->prepare("UPDATE `users` SET `token` = '',token_expire='' WHERE email = ? ");
+            $sql_remove_token->bind_param("s", $email);
+            $sql_remove_token->execute();
+
+
 
             $msg = "<p class='mb-4  border-l-4   p-3 font-md bg-green-100 border-green-500 text-green-700'> Your password has been updated. Please login . </p> ";
         }
@@ -91,7 +97,7 @@ else{
       <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Shoes">
       <h2 class="mt-10 mb-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Reset your password</h2>
 </div>
-    <form  class="space-y-6" action="password_reset.php" method="POST">
+    <form  class="space-y-6" action="password_reset.php?email=<?= $email;?>&token=<?= $token;?>" method="POST">
         
          <div class="mb-4">
             <?= $msg;?>

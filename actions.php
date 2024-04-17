@@ -2,7 +2,7 @@
 
 require_once "components/db.php";
 
-
+require_once "mailer.php";
 
 
 function login_checker($conn){
@@ -232,13 +232,14 @@ function register($conn){
 
 
 
-function req_password_reset(){
+function req_password_reset($conn){
 
-    if($_POST["email"] || $_POST["email"]===""){
+    if(!isset($_POST["email"]) || $_POST["email"]==""){
         $json = json_encode(array(
             "status"=>"error",
             "msg"=>"Sorry, Please provide an email address to reset password."
         ));
+        return $json;
     }
 
     $email = mysqli_escape_string($conn, $_REQUEST["email"]);
@@ -252,16 +253,18 @@ function req_password_reset(){
      
         $random_bytes = random_bytes(20);
         $token = bin2hex($random_bytes);
-        $sql_token = "UPDATE users SET token=$token WHERE email=$email and token_expire = DATE_ADD(NOW(),INTERVAL 15 MINUTE)";
-        mysqli_query($conn, $sql_token);
+        $sql_token = $conn->prepare("UPDATE users SET token=?, token_expire = DATE_ADD(NOW(),INTERVAL 15 MINUTE)  WHERE email=?") ;
+        $sql_token->bind_param("ss", $token, $email);
+        $sql_token->execute();
+       
 
-        password_reset_mail($email);
+        password_reset_mail($email,$token);
         
         $json = json_encode(array(
             "status"=>"success",
             "msg"=>"An mail with password reset instruction has been sent to your email. "
         ));
-        return json;
+        return $json;
 
 
           
