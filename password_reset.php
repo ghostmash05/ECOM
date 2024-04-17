@@ -1,5 +1,7 @@
 <?php 
-require_once "db.php";
+include_once "components/header.php" ;
+
+
 
 if(isset($_GET["token"]) && isset($_GET["email"] )){
 
@@ -128,3 +130,5 @@ if(isset($_GET["token"]) && isset($_GET["email"] )){
 </div>
 </div>
 </div>
+
+ <?php include_once "components/footer.php"  ?>
