@@ -345,8 +345,8 @@ function add_to_cart($conn){
 
       
         $current_quanity = (int)$res_sql_for_exiting_cart["quanitity"] + (int)$quantity;
-        $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where cart_id = ?");
-        $sql_for_increment_cart_quantity->bind_param("ss",$current_quanity, $cart_id);
+        $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where product_id = ?");
+        $sql_for_increment_cart_quantity->bind_param("ss",$current_quanity, $product_id);
         if($sql_for_increment_cart_quantity.execute()){
 
             $json= json_encode(array(
@@ -422,8 +422,8 @@ function update_cart_item($conn){
 
       
         $current_quanity = (int)$res_sql_for_exiting_cart["quanitity"] + (int)$quantity;
-        $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where cart_id = ?");
-        $sql_for_increment_cart_quantity->bind_param("ss",$current_quanity, $cart_id);
+        $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where product_id = ?");
+        $sql_for_increment_cart_quantity->bind_param("ss",$current_quanity, $product_id);
         if($sql_for_increment_cart_quantity.execute()){
 
             $json= json_encode(array(
@@ -486,8 +486,8 @@ function delete_cart_item($conn){
 
       
         
-        $sql_for_delete_cart_item = $conn->prepare("DELETE FROM cart WHERE cart_id = ? AND product_id;");
-        $sql_for_delete_cart_item->bind_param("ss",$current_quanity, $cart_id);
+        $sql_for_delete_cart_item = $conn->prepare("DELETE FROM cart WHERE user_id = ? AND product_id = ?");
+        $sql_for_delete_cart_item->bind_param("ss",$user_id, $cart_id);
         if($sql_for_delete_cart_item.execute()){
 
             $json= json_encode(array(
