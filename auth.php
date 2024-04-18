@@ -19,7 +19,6 @@ exit();
 
 }
 
-echo $_SESSION["email"];
 
 
 

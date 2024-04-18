@@ -1,6 +1,6 @@
 <?php
 
-require_once "components/db.php";
+require_once "components/header.php";
 
 require_once "mailer.php";
 
@@ -317,12 +317,14 @@ function add_to_cart($conn){
 
     $user_id = $_SESSION["user_id"];
     $product_id = mysqli_real_escape_string($conn,$_REQUEST["product_id"]);
+    $product_id = (int)$product_id;
     $quantity = mysqli_real_escape_string($conn, $_REQUEST["quantity"]);
+    $quantity = (int)$quantity;
     $sql_for_product_info = $conn->prepare("SELECT * from products where product_id = ?");
-    $sql_for_product_info->bind_param("ss",$product_id);
+    $sql_for_product_info->bind_param("s",$product_id);
     $sql_for_product_info->execute();
 
-    $res_sql_product_info  = $sql_for_product_info->get_result(MYSQLI_ASSOC);
+    $res_sql_product_info  = $sql_for_product_info->get_result();
     
     if($res_sql_product_info->num_rows<1){
 
@@ -336,20 +338,27 @@ function add_to_cart($conn){
 
 
 
-    $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? and product_id = ?");
+    $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? AND  product_id = ?");
 
     $sql_for_exiting_cart_check->bind_param("ss",$user_id, $product_id);
     $sql_for_exiting_cart_check->execute();
 
-    $res_sql_for_exiting_cart = sql_for_exiting_cart_check->get_result(MYSQLI_ASSOC);
+    $res_sql_for_exiting_cart = $sql_for_exiting_cart_check->get_result();
+
+    $res_sql_for_exiting_cart_assoc = $res_sql_for_exiting_cart->fetch_array(MYSQLI_ASSOC);
+
+    
+
+   
+
 
     if($res_sql_for_exiting_cart->num_rows>0){
 
       
-        $current_quanity = (int)$res_sql_for_exiting_cart["quanitity"] + (int)$quantity;
+        $current_quanity = (int)$res_sql_for_exiting_cart_assoc["quantity"] + (int)$quantity;
         $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where product_id = ?");
         $sql_for_increment_cart_quantity->bind_param("ss",$current_quanity, $product_id);
-        if($sql_for_increment_cart_quantity.execute()){
+        if($sql_for_increment_cart_quantity->execute()){
 
             $json= json_encode(array(
                 "status"=>"success",
@@ -368,8 +377,8 @@ function add_to_cart($conn){
 
 
         $sql_for_add_cart = $conn->prepare("INSERT INTO `cart` ( `user_id`, `product_id`, `quantity`) VALUES (?, ?, ?)");
-        $sql_for_add_cart->bind_param("sss",$user_id, (int)$product_id, (int)quantity);
-        if($sql_for_add_cart.execute()){
+        $sql_for_add_cart->bind_param("sdd",$user_id, $product_id, $quantity);
+        if($sql_for_add_cart->execute()){
 
             $json= json_encode(array(
                 "status"=>"success",
@@ -401,7 +410,7 @@ function update_cart_item($conn){
     $sql_for_product_info->bind_param("ss",$product_id);
     $sql_for_product_info->execute();
 
-    $res_sql_product_info  = $sql_for_product_info->get_result(MYSQLI_ASSOC);
+    $res_sql_product_info  = $sql_for_product_info->get_result();
     
     if($res_sql_product_info->num_rows<1){
 

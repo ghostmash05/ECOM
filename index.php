@@ -5,7 +5,7 @@
 
 
 
-
+echo $_SESSION["user_id"];
 $sql = "SELECT * FROM `products`";
 $query = mysqli_query($conn, $sql);
 $res = mysqli_fetch_array($query);
@@ -41,6 +41,36 @@ else{
 
 <body>
 <div class="color">
+<div id="cart_msg">
+<div aria-live="assertive" class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6">
+  <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
+  
+    <div class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+      <div class="p-4">
+        <div class="flex items-start">
+          <div class="flex-shrink-0">
+            <svg class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div class="ml-3 w-0 flex-1 pt-0.5">
+            <p id ="success_tick" class="text-sm font-medium text-gray-900"></p>
+            <p id ="success_msg" class="mt-1 text-sm text-gray-500"></p>
+          </div>
+          <div class="ml-4 flex flex-shrink-0">
+            <button type="button" class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <span class="sr-only">Close</span>
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
                 <div class="nav-left">
                     <a href="#">Home</a>
                     <a href="/about.php">About</a>
@@ -94,7 +124,7 @@ else{
     </div>
     <div class="cart">
 
-        <button  id="add_to_cart_btn"  product_id ="<?=$product_id;?>" ><ion-icon name="cart-outline"></ion-icon>&nbsp Add to Cart</button>
+        <button  id="add_to_cart_btn"  data-product_id ="<?=$product_id;?>" ><ion-icon name="cart-outline"></ion-icon>&nbsp Add to Cart</button>
     </div>
 </body>
 </body>
@@ -106,6 +136,8 @@ else{
 
 <script>
     $(document).ready(function(){
+        $("#cart_msg").hide();
+       
        
         $.ajax({
             url:"actions.php?action=cart_total",
@@ -165,9 +197,11 @@ $("#add_to_cart_btn").click(function(){
   dataType:'json',
   success:function(data){
 
+
+    console.log("coming here");
+
     
     
-    var data = JSON.parse(JSON.stringify(data));
 
     
     console.log(data);
@@ -183,8 +217,10 @@ $("#add_to_cart_btn").click(function(){
 
     else{
      console.log(data["msg"]);
-
-      
+     $("#cart_msg").show();
+     $("#success_tick").html("Added to Cart");
+        $("#success_msg").html("Your item has been added to cart");
+        
     }
 
 
