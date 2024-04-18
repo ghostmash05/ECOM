@@ -1,23 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Extreme Shoes</title>
-    <link rel="stylesheet" href="home.css">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-</head>
-
+<link rel="stylesheet" href="./../home.css">
 
 <?php include_once "components/header.php";
+
+
 
 
 $sql = "SELECT * FROM `products`";
@@ -54,7 +40,7 @@ else{
 
 
 <body>
-    <div class="color">
+<div class="color">
                 <div class="nav-left">
                     <a href="#">Home</a>
                     <a href="/about.php">About</a>
@@ -107,12 +93,16 @@ else{
         <h2>$<?=$price;?></h2>
     </div>
     <div class="cart">
-        <button><ion-icon name="cart-outline"></ion-icon>&nbsp Add to Cart</button>
+
+        <button  id="add_to_cart_btn"  product_id ="<?=$product_id;?>" ><ion-icon name="cart-outline"></ion-icon>&nbsp Add to Cart</button>
     </div>
 </body>
 </body>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<?php include_once "components/footer.php"  ?>
+
+
 
 <script>
     $(document).ready(function(){
@@ -159,6 +149,52 @@ else{
 
 })
 
+$("#add_to_cart_btn").click(function(){
+
+
+    var quantity = parseInt($("#cart_quantity").val());
+
+    var product_id = parseInt($(this).data('product_id'));
+
+    
+    
+    $.ajax({
+  url:"actions.php?action=add_to_cart",
+  method:"POST",
+  data:{product_id:product_id, quantity:quantity},
+  dataType:'json',
+  success:function(data){
+
+    
+    
+    var data = JSON.parse(JSON.stringify(data));
+
+    
+    console.log(data);
+    
+
+    if (data["status"]==="error"){
+  
+      
+      
+
+
+    }
+
+    else{
+     console.log(data["msg"]);
+
+      
+    }
+
+
+  }
+})
+
+  
+
+})
+
     
 
     
@@ -167,5 +203,3 @@ else{
     })
 </script>
 
-
-</html>
