@@ -291,7 +291,7 @@ function cart_total($conn){
     }
 
 
-    if(!isset($_SESSION["unique_id"])){
+    if(!isset($_SESSION["user_id"])){
 
 
         $_SESSION["user_id"]= uniqid();
@@ -356,8 +356,8 @@ function add_to_cart($conn){
 
       
         $current_quanity = (int)$res_sql_for_exiting_cart_assoc["quantity"] + (int)$quantity;
-        $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where product_id = ?");
-        $sql_for_increment_cart_quantity->bind_param("ss",$current_quanity, $product_id);
+        $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where product_id = ? and user_id = ?");
+        $sql_for_increment_cart_quantity->bind_param("sss",$current_quanity, $product_id,$user_id);
         if($sql_for_increment_cart_quantity->execute()){
 
             $json= json_encode(array(
@@ -405,9 +405,11 @@ function update_cart_item($conn){
 
     $user_id = $_SESSION["user_id"];
     $product_id = mysqli_real_escape_string($conn,$_REQUEST["product_id"]);
+    $product_id = (int)$product_id;
     $quantity = mysqli_real_escape_string($conn, $_REQUEST["quantity"]);
+    $quantity = (int)$quantity;
     $sql_for_product_info = $conn->prepare("SELECT * from products where product_id = ?");
-    $sql_for_product_info->bind_param("ss",$product_id);
+    $sql_for_product_info->bind_param("s",$product_id);
     $sql_for_product_info->execute();
 
     $res_sql_product_info  = $sql_for_product_info->get_result();
@@ -416,26 +418,35 @@ function update_cart_item($conn){
 
         $json= json_encode(array(
             "status"=>"erorr",
-            "msg"=>"Sorry this product does not exits."
+            "msg"=>"Sorry The product youre trying to order does not exits."
         ));
         return $json;
 
     }
 
-    $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? and product_id = ?");
+
+
+    $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? AND  product_id = ?");
 
     $sql_for_exiting_cart_check->bind_param("ss",$user_id, $product_id);
     $sql_for_exiting_cart_check->execute();
 
-    $res_sql_for_exiting_cart = sql_for_exiting_cart_check->get_result(MYSQLI_ASSOC);
+    $res_sql_for_exiting_cart = $sql_for_exiting_cart_check->get_result();
+
+    $res_sql_for_exiting_cart_assoc = $res_sql_for_exiting_cart->fetch_array(MYSQLI_ASSOC);
+
+    
+
+   
+
 
     if($res_sql_for_exiting_cart->num_rows>0){
 
       
-        $current_quanity = (int)$res_sql_for_exiting_cart["quanitity"] + (int)$quantity;
-        $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where product_id = ?");
-        $sql_for_increment_cart_quantity->bind_param("ss",$current_quanity, $product_id);
-        if($sql_for_increment_cart_quantity.execute()){
+        $current_quanity =  (int)$quantity;
+        $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where product_id = ? and user_id = ?");
+        $sql_for_increment_cart_quantity->bind_param("sss",$current_quanity, $product_id,$user_id);
+        if($sql_for_increment_cart_quantity->execute()){
 
             $json= json_encode(array(
                 "status"=>"success",
@@ -469,37 +480,47 @@ function delete_cart_item($conn){
 
     $user_id = $_SESSION["user_id"];
     $product_id = mysqli_real_escape_string($conn,$_REQUEST["product_id"]);
-    $quantity = mysqli_real_escape_string($conn, $_REQUEST["quantity"]);
+    $product_id = (int)$product_id;
+   
     $sql_for_product_info = $conn->prepare("SELECT * from products where product_id = ?");
-    $sql_for_product_info->bind_param("ss",$product_id);
+    $sql_for_product_info->bind_param("s",$product_id);
     $sql_for_product_info->execute();
 
-    $res_sql_product_info  = $sql_for_product_info->get_result(MYSQLI_ASSOC);
+    $res_sql_product_info  = $sql_for_product_info->get_result();
     
     if($res_sql_product_info->num_rows<1){
 
         $json= json_encode(array(
             "status"=>"erorr",
-            "msg"=>"Sorry this product does not exits."
+            "msg"=>"Sorry The product youre trying to order does not exits."
         ));
         return $json;
 
     }
 
-    $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? and product_id = ?");
+
+
+    $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? AND  product_id = ?");
 
     $sql_for_exiting_cart_check->bind_param("ss",$user_id, $product_id);
     $sql_for_exiting_cart_check->execute();
 
-    $res_sql_for_exiting_cart = sql_for_exiting_cart_check->get_result(MYSQLI_ASSOC);
+    $res_sql_for_exiting_cart = $sql_for_exiting_cart_check->get_result();
+
+    $res_sql_for_exiting_cart_assoc = $res_sql_for_exiting_cart->fetch_array(MYSQLI_ASSOC);
+
+    
+
+   
+
 
     if($res_sql_for_exiting_cart->num_rows>0){
 
       
         
         $sql_for_delete_cart_item = $conn->prepare("DELETE FROM cart WHERE user_id = ? AND product_id = ?");
-        $sql_for_delete_cart_item->bind_param("ss",$user_id, $cart_id);
-        if($sql_for_delete_cart_item.execute()){
+        $sql_for_delete_cart_item->bind_param("ss",$user_id, $product_id);
+        if($sql_for_delete_cart_item->execute()){
 
             $json= json_encode(array(
                 "status"=>"success",
@@ -530,7 +551,6 @@ function clear_cart($conn){
 
 
     $user_id = $_SESSION["user_id"];
-    $product_id = mysqli_real_escape_string($conn,$_REQUEST["product_id"]);
 
 
     $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? ");
@@ -538,13 +558,13 @@ function clear_cart($conn){
     $sql_for_exiting_cart_check->bind_param("s",$user_id);
     $sql_for_exiting_cart_check->execute();
 
-    $res_sql_for_exiting_cart = sql_for_exiting_cart_check->get_result(MYSQLI_ASSOC);
+    $res_sql_for_exiting_cart = $sql_for_exiting_cart_check->get_result();
 
     if($res_sql_for_exiting_cart->num_rows>0){
 
         $sql_for_delete_cart = $conn->prepare("DELETE FROM cart WHERE user_id = ?");
-        $sql_for_delete_cart_item->bind_param("s",$user_id);
-        if($sql_for_delete_cart_item.execute()){
+        $sql_for_delete_cart->bind_param("s",$user_id);
+        if($sql_for_delete_cart->execute()){
 
             $json= json_encode(array(
                 "status"=>"success",
@@ -567,6 +587,32 @@ function clear_cart($conn){
     }
 
 
+
+
+}
+
+
+
+function get_cart_items($conn){
+
+    $user_id = $_SESSION["user_id"];
+
+
+    $sql_for_exiting_cart_check = $conn->prepare("SELECT * FROM cart  LEFT JOIN products ON cart.product_id = products.product_id  WHERE user_id=?");
+
+    $sql_for_exiting_cart_check->bind_param("s",$user_id);
+    $sql_for_exiting_cart_check->execute();
+
+    $res_sql_for_exiting_cart = $sql_for_exiting_cart_check->get_result();
+
+    $res_row  =  $res_sql_for_exiting_cart->fetch_all(MYSQLI_ASSOC);
+
+   
+    if($res_sql_for_exiting_cart->num_rows>0){
+
+        $json = json_encode($res_row);
+        return $json;
+    }
 
 
 }
@@ -625,6 +671,15 @@ if ( isset($_GET["action"]) && isset($_POST)){
 
     elseif($_GET["action"]=="clear_cart"){
         $json_out = clear_cart($conn);
+        echo $json_out;
+    }
+
+    elseif($_GET["action"]=="get_cart_items"){
+        $json_out = get_cart_items($conn);
+        echo $json_out;
+    }
+    elseif($_GET["action"]=="clear_cart"){
+        $json_out = cler_cart($conn);
         echo $json_out;
     }
 

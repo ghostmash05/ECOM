@@ -156,7 +156,7 @@ else{
     $(document).ready(function(){
         $("#cart_msg").hide();
        
-       
+       function load_cart_total(){
         $.ajax({
             url:"actions.php?action=cart_total",
             method:"GET",
@@ -169,7 +169,8 @@ else{
                 $("#cart_total").html(data["msg"]);
 
             }
-        })
+        })}
+        load_cart_total();
 
         $("#increase_btn").click(function(){
 
@@ -227,7 +228,7 @@ $("#add_to_cart_btn").click(function(){
     
 
     
-    console.log(data);
+    
     
 
     if (data["status"]==="error"){
@@ -239,10 +240,12 @@ $("#add_to_cart_btn").click(function(){
     }
 
     else{
+        load_cart_total();
      console.log(data["msg"]);
      $("#cart_msg").show();
      $("#success_tick").html("Added to Cart");
         $("#success_msg").html("Your item has been added to cart");
+
         
     }
 
