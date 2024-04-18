@@ -518,6 +518,46 @@ function clear_cart($conn){
 
 
 
+    $user_id = $_SESSION["user_id"];
+    $product_id = mysqli_real_escape_string($conn,$_REQUEST["product_id"]);
+
+
+    $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? ");
+
+    $sql_for_exiting_cart_check->bind_param("s",$user_id);
+    $sql_for_exiting_cart_check->execute();
+
+    $res_sql_for_exiting_cart = sql_for_exiting_cart_check->get_result(MYSQLI_ASSOC);
+
+    if($res_sql_for_exiting_cart->num_rows>0){
+
+        $sql_for_delete_cart = $conn->prepare("DELETE FROM cart WHERE user_id = ?");
+        $sql_for_delete_cart_item->bind_param("s",$user_id);
+        if($sql_for_delete_cart_item.execute()){
+
+            $json= json_encode(array(
+                "status"=>"success",
+                "msg"=>"All Cart Items Removed."
+            ));
+            return $json;
+        }
+
+
+
+    }
+
+    else{
+        $json= json_encode(array(
+            "status"=>"error",
+            "msg"=>"You dont have item in your cart"
+        ));
+        return $json;
+
+    }
+
+
+
+
 }
 
 
@@ -554,6 +594,26 @@ if ( isset($_GET["action"]) && isset($_POST)){
 
     elseif($_GET["action"]=="cart_total"){
         $json_out = cart_total($conn);
+        echo $json_out;
+    }
+
+    elseif($_GET["action"]=="add_to_cart"){
+        $json_out = add_to_cart($conn);
+        echo $json_out;
+    }
+    elseif($_GET["action"]=="update_cart_item"){
+        $json_out = update_cart_item($conn);
+        echo $json_out;
+    }
+
+
+    elseif($_GET["action"]=="delete_cart_item"){
+        $json_out = delete_cart_item($conn);
+        echo $json_out;
+    }
+
+    elseif($_GET["action"]=="clear_cart"){
+        $json_out = clear_cart($conn);
         echo $json_out;
     }
 
