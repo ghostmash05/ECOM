@@ -36,7 +36,7 @@ echo $_SESSION["email"];
       <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Shoes">
       <h2 class="mt-10 mb-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
 </div>
-    <form id="login_form" class="space-y-6" action="actions.php?action=login" method="POST">
+    <form id="login_form" class="space-y-6" action="#" method="POST">
         <div class="mb-4">
          
           
@@ -82,7 +82,7 @@ echo $_SESSION["email"];
         </div>
 
         <div class="text-sm leading-6">
-          <button id="forgot_password_lnk" class="font-semibold text-yellow-600 hover:text-indigo-500">Forgot password?</button>
+          <a id="forgot_password_lnk" class="font-semibold text-yellow-600 hover:text-indigo-500">Forgot password?</a>
         </div>
       </div>
 
@@ -107,6 +107,8 @@ echo $_SESSION["email"];
 <form  id ="form_reset_password" class="space-y-6" action="actions.php?action=forgot_password" method="POST">
   
    <div class="mb-4">
+   <p class="mb-4 bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-3 font-md" style="display:none" id="forgot_alert_msg"> </p>
+
    
     <div class="relative mt-2 rounded-md shadow-sm">
       <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -128,9 +130,10 @@ echo $_SESSION["email"];
 
  
   <button id="forgot_password_btn" type="submit"  class="flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-md font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Retrive Password</button>
-  <p class="mt-4 text-center text-sm leading-6 text-gray-500">
+  
+</form><p class="mt-4 text-center text-sm leading-6 text-gray-500">
     Want to login?
-     <button id ="login_now_two"  class="font-semibold text-yellow-600 hover:text-indigo-500">Login  Now </button>
+     <a id ="login_now_two"  class="font-semibold text-yellow-600 hover:text-indigo-500">Login  Now </a>
    </p></div>
 <div id="singup">
 
@@ -240,8 +243,9 @@ echo $_SESSION["email"];
 
     <p class="mt-4 text-center text-sm leading-6 text-gray-500">
       Already a member?
-      <button id ="login_now"  class="font-semibold text-yellow-600 hover:text-indigo-500">Login  Now </button>
+      <a id ="login_now"  class="font-semibold text-yellow-600 hover:text-indigo-500">Login  Now </a>
      </p>
+
 </div>
 </div>
 
@@ -340,6 +344,7 @@ $.ajax({
       $("#login_alert_msg").addClass("bg-green-100 border-green-500 text-green-700");
       $("#login_alert_msg").show();
       $("#login_alert_msg").html(data["msg"]);
+     
     }
 
 
@@ -357,7 +362,7 @@ $.ajax({
 $("#forgot_password_btn").click(function(e){
 
 e.preventDefault();
-console.log("trying to post");
+
 $.ajax({
   url:"/actions.php?action=forgot_password",
   method:"POST",
@@ -367,32 +372,33 @@ $.ajax({
     
     
     var data = JSON.parse(JSON.stringify(data));
+    
 
    
 
-    var redirect = <?php echo $redirect; ?>;
+    
 
     if (data["status"]==="error"){
   
-      $("#login_alert_msg").removeClass("bg-green-100 border-green-500 text-green-700");
+      $("#forgot_alert_msg").removeClass("bg-green-100 border-green-500 text-green-700");
 
-      $("#login_alert_msg").addClass("bg-orange-100 border-orange-500 text-orange-700");
-      $("#login_alert_msg").show();
+      $("#forgot_alert_msg").addClass("bg-orange-100 border-orange-500 text-orange-700");
+      $("#forgot_alert_msg").show();
 
-      $("#login_alert_msg").html(data["msg"]);
+      $("#forgot_alert_msg").html(data["msg"]);
       
 
 
     }
 
     else{
-      $("#login_alert_msg").removeClass("bg-orange-100 border-orange-500 text-orange-700");
+      $("#forgot_alert_msg").removeClass("bg-orange-100 border-orange-500 text-orange-700");
 
-      $("#login_alert_msg").addClass("bg-green-100 border-green-500 text-green-700");
-      $("#login_alert_msg").show();
-      $("#login_alert_msg").html(data["msg"]);
+      $("#forgot_alert_msg").addClass("bg-green-100 border-green-500 text-green-700");
+      $("#forgot_alert_msg").show();
+      $("#forgot_alert_msg").html(data["msg"]);
 
-      window.location.href = redirect;
+      
     }
 
 

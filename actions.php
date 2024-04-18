@@ -8,7 +8,7 @@ require_once "mailer.php";
 function login_checker($conn){
     
 
-    if(!isset($_REQUEST["email"])){
+    if(!isset($_POST["email"])){
      
         $json = json_encode(array(
             "status" => "error",
@@ -65,7 +65,7 @@ function login_checker($conn){
 }
 
 function register($conn){
-    if(!isset($_REQUEST["full_name"]) || $_REQUEST["full_name"]===""){
+    if(!isset($_POST["full_name"]) || $_POST["full_name"]===""){
      
         $json = json_encode(array(
             "status" => "error",
@@ -95,7 +95,7 @@ function register($conn){
 
     }
 
-    if(!isset($_REQUEST["password"])  ||  $_REQUEST["password"]===""  ){
+    if(!isset($_POST["password"])  ||  $_POST["password"]===""  ){
         $json= json_encode(array(
             "status"=>"error",
             "msg"=>"Sorry, please enter a password. ",
@@ -108,7 +108,7 @@ function register($conn){
 
     
 
-    if(!isset($_REQUEST["cnf_password"]) || $_REQUEST["cnf_password"]==="" ){
+    if(!isset($_POST["cnf_password"]) || $_POST["cnf_password"]==="" ){
         $json= json_encode(array(
             "status"=>"error",
             "msg"=>"Sorry, please enter password in confirm password field to confirm . ",
@@ -119,7 +119,7 @@ function register($conn){
 
     }
 
-    if(!isset($_REQUEST["phone"])  || $_REQUEST["phone"]===""){
+    if(!isset($_POST["phone"])  || $_POST["phone"]===""){
         $json= json_encode(array(
             "status"=>"error",
             "msg"=>"Sorry, please provide a phone number. ",
@@ -130,7 +130,7 @@ function register($conn){
 
     }
 
-    if($_REQUEST["password"]!=$_REQUEST["cnf_password"]){
+    if($_POST["password"]!=$_POST["cnf_password"]){
 
         $json= json_encode(array(
             "status"=>"error",
@@ -139,12 +139,12 @@ function register($conn){
 
         return $json;
     }
-    $full_name =  mysqli_real_escape_string($conn, $_REQUEST["full_name"]) ;
+    $full_name =  mysqli_real_escape_string($conn, $_POST["full_name"]) ;
     $email =  mysqli_real_escape_string($conn, $_POST["email"]) ;
     $username =  mysqli_real_escape_string($conn, $_POST["username"]); 
-    $password =  mysqli_real_escape_string($conn, $_REQUEST["password"]); 
+    $password =  mysqli_real_escape_string($conn, $_POST["password"]); 
     $password = md5($password);
-    $phone = mysqli_real_escape_string($conn, $_REQUEST["phone"]);
+    $phone = mysqli_real_escape_string($conn, $_POST["phone"]);
 
 
 
@@ -244,7 +244,7 @@ function req_password_reset($conn){
         return $json;
     }
 
-    $email = mysqli_escape_string($conn, $_REQUEST["email"]);
+    $email = mysqli_escape_string($conn, $_POST["email"]);
 
     $find_user_sql = $conn->prepare("SELECT * from users WHERE email = ?");
     $find_user_sql->bind_param("s", $email);
@@ -277,7 +277,7 @@ function req_password_reset($conn){
             "status"=>"error",
             "msg"=>"Sorry, No user with that email address has been found."
         ));
-        return json;
+        return $json;
 
     }
 }
