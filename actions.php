@@ -37,10 +37,12 @@ function login_checker($conn){
     $sql = $conn->prepare("SELECT * FROM `users` WHERE `email` = ? and `password` = ?");
     $sql->bind_param('ss',$email, $password);
     $sql->execute();
-    $res = $sql->get_result();
+    $res = $sql->get_result(MYSQLI_ASSOC);
     
 
     if ($res->num_rows > 0){
+
+        $_SESSION["email"] = $res["email"]; 
 
         $json =  json_encode(array(
             "status"=>"success",

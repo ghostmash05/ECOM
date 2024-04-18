@@ -1,5 +1,33 @@
 
-<?php include_once "components/header.php"  ?>
+<?php include_once "components/header.php";
+
+$redirect = "dashboard.php";
+
+if(isset($GET["from"])){
+
+  $redirect  = htmlspecialchars($GET["from"]);
+
+
+
+
+}
+
+if(isset($_SESSION["email"])){
+
+  header('Location: dashboard.php');
+exit();
+
+}
+
+
+
+
+?>
+
+
+
+
+
 <div class="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
   <div class="w-full max-w-sm space-y-10">
     <div id="loginp">
@@ -73,7 +101,7 @@
 <div id="reset_password">
   <div>
 <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Shoes">
-<h2 class="mt-10 mb-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Reset your password</h2>
+<h2 class="mt-10 mb-10 text-center text-2xl font-bold leading-9 text-gray-900">Reset your password</h2>
 </div>
 <form  id ="form_reset_password" class="space-y-6" action="actions.php?action=forgot_password" method="POST">
   
@@ -339,7 +367,9 @@ $.ajax({
     
     var data = JSON.parse(JSON.stringify(data));
 
-    console.log(data);
+   
+
+    var redirect = <?php echo $redirect; ?>;
 
     if (data["status"]==="error"){
   
@@ -360,6 +390,8 @@ $.ajax({
       $("#login_alert_msg").addClass("bg-green-100 border-green-500 text-green-700");
       $("#login_alert_msg").show();
       $("#login_alert_msg").html(data["msg"]);
+
+      window.location.href = redirect;
     }
 
 
@@ -388,6 +420,9 @@ $.ajax({
 
     
 
+
+    
+
     if (data["status"]==="error"){
   
       $("#register_alert_msg").removeClass("bg-green-100 border-green-500 text-green-700");
@@ -407,6 +442,8 @@ $.ajax({
       $("#register_alert_msg").addClass("bg-green-100 border-green-500 text-green-700");
       $("#register_alert_msg").show();
       $("#register_alert_msg").html(data["msg"]);
+
+      
     }
 
 
