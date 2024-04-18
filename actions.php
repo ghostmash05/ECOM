@@ -281,6 +281,252 @@ function req_password_reset($conn){
 }
 
 
+function cart_total($conn){
+
+    if(isset($_SESSION["email"])){
+
+        $_SESSION["user_id"]= $_SESSION["email"];
+    }
+
+
+    if(!isset($_SESSION["unique_id"])){
+
+
+        $_SESSION["user_id"]= uniqid();
+    }
+
+    $sql_total_items = $conn->prepare("SELECT * from cart WHERE user_id = ? ");
+    $sql_total_items->bind_param("s",$_SESSION["user_id"]);
+    $sql_total_items->execute();
+    $res_sql_total_items = $sql_total_items->get_result();
+
+    $json = json_encode(array(
+        "status"=>"success",
+        "msg"=>$res_sql_total_items->num_rows,
+    ));
+    return $json;
+
+
+    }
+
+
+
+function add_to_cart($conn){
+
+    $user_id = $_SESSION["user_id"];
+    $product_id = mysqli_real_escape_string($conn,$_REQUEST["product_id"]);
+    $quantity = mysqli_real_escape_string($conn, $_REQUEST["quantity"]);
+    $sql_for_product_info = $conn->prepare("SELECT * from products where product_id = ?");
+    $sql_for_product_info->bind_param("ss",$product_id);
+    $sql_for_product_info->execute();
+
+    $res_sql_product_info  = $sql_for_product_info->get_result(MYSQLI_ASSOC);
+    
+    if($res_sql_product_info->num_rows<1){
+
+        $json= json_encode(array(
+            "status"=>"erorr",
+            "msg"=>"Sorry The product youre trying to order does not exits."
+        ));
+        return $json;
+
+    }
+
+
+
+    $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? and product_id = ?");
+
+    $sql_for_exiting_cart_check->bind_param("ss",$user_id, $product_id);
+    $sql_for_exiting_cart_check->execute();
+
+    $res_sql_for_exiting_cart = sql_for_exiting_cart_check->get_result(MYSQLI_ASSOC);
+
+    if($res_sql_for_exiting_cart->num_rows>0){
+
+      
+        $current_quanity = (int)$res_sql_for_exiting_cart["quanitity"] + (int)$quantity;
+        $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where cart_id = ?");
+        $sql_for_increment_cart_quantity->bind_param("ss",$current_quanity, $cart_id);
+        if($sql_for_increment_cart_quantity.execute()){
+
+            $json= json_encode(array(
+                "status"=>"success",
+                "msg"=>"Cart updated."
+            ));
+            return $json;
+        }
+
+        
+
+
+    }
+
+    else{
+
+
+
+        $sql_for_add_cart = $conn->prepare("INSERT INTO `cart` ( `user_id`, `product_id`, `quantity`) VALUES (?, ?, ?)");
+        $sql_for_add_cart->bind_param("sss",$user_id, (int)$product_id, (int)quantity);
+        if($sql_for_add_cart.execute()){
+
+            $json= json_encode(array(
+                "status"=>"success",
+                "msg"=>"Item added to cart"
+            ));
+            return $json;
+        }
+
+
+    }
+
+
+
+    
+
+
+
+}
+
+
+
+function update_cart_item($conn){
+
+
+    $user_id = $_SESSION["user_id"];
+    $product_id = mysqli_real_escape_string($conn,$_REQUEST["product_id"]);
+    $quantity = mysqli_real_escape_string($conn, $_REQUEST["quantity"]);
+    $sql_for_product_info = $conn->prepare("SELECT * from products where product_id = ?");
+    $sql_for_product_info->bind_param("ss",$product_id);
+    $sql_for_product_info->execute();
+
+    $res_sql_product_info  = $sql_for_product_info->get_result(MYSQLI_ASSOC);
+    
+    if($res_sql_product_info->num_rows<1){
+
+        $json= json_encode(array(
+            "status"=>"erorr",
+            "msg"=>"Sorry this product does not exits."
+        ));
+        return $json;
+
+    }
+
+    $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? and product_id = ?");
+
+    $sql_for_exiting_cart_check->bind_param("ss",$user_id, $product_id);
+    $sql_for_exiting_cart_check->execute();
+
+    $res_sql_for_exiting_cart = sql_for_exiting_cart_check->get_result(MYSQLI_ASSOC);
+
+    if($res_sql_for_exiting_cart->num_rows>0){
+
+      
+        $current_quanity = (int)$res_sql_for_exiting_cart["quanitity"] + (int)$quantity;
+        $sql_for_increment_cart_quantity = $conn->prepare("UPDATE cart set quantity = ? where cart_id = ?");
+        $sql_for_increment_cart_quantity->bind_param("ss",$current_quanity, $cart_id);
+        if($sql_for_increment_cart_quantity.execute()){
+
+            $json= json_encode(array(
+                "status"=>"success",
+                "msg"=>"Cart updated."
+            ));
+            return $json;
+        }
+
+        
+
+
+    }
+
+    else{
+        $json= json_encode(array(
+            "status"=>"error",
+            "msg"=>"You don't have this item in your cart."
+        ));
+        return $json;
+
+    }
+
+
+
+
+
+}
+
+
+function delete_cart_item($conn){
+
+    $user_id = $_SESSION["user_id"];
+    $product_id = mysqli_real_escape_string($conn,$_REQUEST["product_id"]);
+    $quantity = mysqli_real_escape_string($conn, $_REQUEST["quantity"]);
+    $sql_for_product_info = $conn->prepare("SELECT * from products where product_id = ?");
+    $sql_for_product_info->bind_param("ss",$product_id);
+    $sql_for_product_info->execute();
+
+    $res_sql_product_info  = $sql_for_product_info->get_result(MYSQLI_ASSOC);
+    
+    if($res_sql_product_info->num_rows<1){
+
+        $json= json_encode(array(
+            "status"=>"erorr",
+            "msg"=>"Sorry this product does not exits."
+        ));
+        return $json;
+
+    }
+
+    $sql_for_exiting_cart_check = $conn->prepare("SELECT * from cart where user_id = ? and product_id = ?");
+
+    $sql_for_exiting_cart_check->bind_param("ss",$user_id, $product_id);
+    $sql_for_exiting_cart_check->execute();
+
+    $res_sql_for_exiting_cart = sql_for_exiting_cart_check->get_result(MYSQLI_ASSOC);
+
+    if($res_sql_for_exiting_cart->num_rows>0){
+
+      
+        
+        $sql_for_delete_cart_item = $conn->prepare("DELETE FROM cart WHERE cart_id = ? AND product_id;");
+        $sql_for_delete_cart_item->bind_param("ss",$current_quanity, $cart_id);
+        if($sql_for_delete_cart_item.execute()){
+
+            $json= json_encode(array(
+                "status"=>"success",
+                "msg"=>"Item deleted from cart. "
+            ));
+            return $json;
+        }
+
+        
+
+
+    }
+    else{
+        $json= json_encode(array(
+            "status"=>"error",
+            "msg"=>"You don't have this item in your cart."
+        ));
+        return $json;
+
+    }
+
+
+}
+
+
+function clear_cart($conn){
+
+
+
+}
+
+
+
+
+    
+
+
+
 
 
 
@@ -303,6 +549,11 @@ if ( isset($_GET["action"]) && isset($_POST)){
     elseif($_GET["action"]=="forgot_password"){
 
         $json_out = req_password_reset($conn);
+        echo $json_out;
+    }
+
+    elseif($_GET["action"]=="cart_total"){
+        $json_out = cart_total($conn);
         echo $json_out;
     }
 

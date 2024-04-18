@@ -21,6 +21,7 @@
                     <a href="#">Home</a>
                     <a href="#">About</a>
                     <a href="#">Contact</a>
+                    
                 </div>
                 <div class="content">
                     <div class="social-media">
@@ -58,7 +59,7 @@
                 </div>
     </div>
     <div class="nav-right">
-        <a href="#"><ion-icon name="cart-outline"></ion-icon></a>
+        <a href="#" ><ion-icon name="cart-outline"></ion-icon><p id="cart_total"> </p></a>
         <a href="#"><ion-icon name="person-outline"></ion-icon></a>
     </div>
     <div class="item">
@@ -75,4 +76,32 @@
         <button><ion-icon name="cart-outline"></ion-icon>&nbsp Add to Cart</button>
     </div>
 </body>
+</body>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $(document).ready(function(){
+       
+        $.ajax({
+            url:"actions.php?action=cart_total",
+            method:"GET",
+            dataType:"json",
+            success:function(data){
+
+                var data_json = JSON.parse(JSON.stringify(data));
+                
+                console.log(data_json["msg"]);
+                $("#cart_total").html(data["msg"]);
+
+            }
+        })
+
+    
+
+
+    })
+</script>
+
+
 </html>
