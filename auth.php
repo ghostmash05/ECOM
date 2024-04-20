@@ -70,7 +70,7 @@ exit();
               
               
             </div>
-            <input type="password" name="password" id="password" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 placeholder:text-gray-400 focus:ring-2" placeholder="Password" required>
+            <input type="password" name="password" id="password" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 placeholder:text-gray-400" placeholder="Password" required>
        </div>
       </div>
 
@@ -86,7 +86,7 @@ exit();
       </div>
 
       <div>
-        <button type="submit" id="singin_btn" class="flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-md font-semiboldtext-whiteh ">Sign in</button>
+        <button type="submit" id="singin_btn" class="flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-md font-semibold text-white ">Sign in</button>
       </div>
 
       
@@ -132,13 +132,13 @@ exit();
   
 </form><p class="mt-4 text-center text-sm leading-6 text-gray-500">
     Want to login?
-     <a id ="login_now_two"  class="font-semibold text-yellow-600 hover:text-indigo-500">Login  Now </a>
+     <a id ="login_now_two"  class="font-semibold text-yellow-600">Login  Now </a>
    </p></div>
 <div id="singup">
 
   <div>
     <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-    <h2 class="mt-10 mb-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Create an account</h2>
+    <h2 class="mt-10 mb-10 text-center text-2xl font-bold leading-9 text-gray-900">Create an account</h2>
 </div>
 
 <form id="singup_form" class="space-y-6" action="actions.php?action=register" method="POST">
@@ -149,20 +149,20 @@ exit();
 
          
           <div class="relative mt-4 rounded-md shadow-sm">
-            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <div class=" flex items-center pl-3">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-400">
                 <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
               </svg>
               
               
             </div>
-            <input type="full_name" name="full_name" id="full_name" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6" placeholder="Full Name" required>
+            <input type="full_name" name="full_name" id="full_name" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900" placeholder="Full Name" required>
        </div>
 
        <div class="mb-4">
          
         <div class="relative mt-4 rounded-md shadow-sm">
-          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <div class=" flex items-center pl-3">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-400">
               <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd" />
             </svg>
@@ -170,7 +170,7 @@ exit();
             
             
           </div>
-          <input type="username" name="username" id="username" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6" placeholder="Username" required>
+          <input type="username" name="username" id="username" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900" placeholder="Username" required>
      </div>
         <div class="mb-4">
          
@@ -186,7 +186,7 @@ exit();
               
               
             </div>
-            <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6" placeholder="Your Email" required>
+            <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 " placeholder="Your Email" required>
        </div>
 
        
@@ -201,7 +201,7 @@ exit();
             
             
           </div>
-          <input type="password" name="password" id="password" minlength=8 maxlength=20  class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6" placeholder="Password" required>
+          <input type="password" name="password" id="password" minlength=8 maxlength=20  class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900" placeholder="Password" required>
      </div>
 
      <div class="mb-4">
@@ -215,7 +215,7 @@ exit();
           
           
         </div>
-        <input type="password" name="cnf_password" id="cnf_password" minlength=8 maxlength=20 class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6" placeholder="Confirm Password" required>
+        <input type="password" name="cnf_password" id="cnf_password" minlength=8 maxlength=20 class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900" placeholder="Confirm Password" required>
    </div>
  
 
@@ -230,17 +230,17 @@ exit();
       
       
     </div>
-    <input type="tel" name="phone" id="phone" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6" placeholder="Your Phone number" required>
+    <input type="tel" name="phone" id="phone" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900" placeholder="Your Phone number" required>
 </div>
 
       <div>
-        <button id ="singup_btn" type="submit" class="mt-10 flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-sm font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Signup</button>
+        <button id ="singup_btn" type="submit" class="mt-10 flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-sm font-semibold leading-6 text-white">Signup</button>
       </div>
 
       
     </form>
 
-    <p class="mt-4 text-center text-sm leading-6 text-gray-500">
+    <p class="mt-4 text-center text-sm text-gray-500">
       Already a member?
       <a id ="login_now"  class="font-semibold text-yellow-600 hover:text-indigo-500">Login  Now </a>
      </p>
