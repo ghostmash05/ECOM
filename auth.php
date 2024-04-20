@@ -28,12 +28,12 @@ exit();
 
 
 
-<div class="flex min-h-full items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
-  <div class="w-full max-w-sm space-y-10">
+<div class="flex min-h-full items-center justify-center px-4 py-12">
+  <div class="w-full">
     <div id="loginp">
         <div>
       <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Shoes">
-      <h2 class="mt-10 mb-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
+      <h2 class="mt-10 mb-10 text-center text-2xl font-bold  text-gray-900">Sign in to your account</h2>
 </div>
     <form id="login_form" class="space-y-6" action="#" method="POST">
         <div class="mb-4">
@@ -46,7 +46,7 @@ exit();
 
             <div class="relative mt-2 rounded-md shadow-sm">
               
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <div class="flex items-center pl-3">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-400">
                   <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
                   <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
@@ -56,13 +56,13 @@ exit();
                 
                 
               </div>
-              <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6" placeholder="Your Email" required>
+              <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-gray-300 placeholder:text-gray-400" placeholder="Your Email" required>
          </div>
 
          <div class="mb-4">
          
           <div class="relative mt-2 rounded-md shadow-sm">
-            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <div class=" flex items-center pl-3">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-400">
                 <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd" />
               </svg>
@@ -70,38 +70,38 @@ exit();
               
               
             </div>
-            <input type="password" name="password" id="password" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6" placeholder="Password" required>
+            <input type="password" name="password" id="password" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 placeholder:text-gray-400 focus:ring-2" placeholder="Password" required>
        </div>
       </div>
 
       <div class="mt-8 mb-4 flex items-center justify-between">
         <div class="flex items-center">
-          <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-yellow-600 focus:ring-indigo-600">
-          <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-900">Remember me</label>
+          <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-yellow-600">
+          <label for="remember-me" class="ml-3 block text-sm text-gray-900">Remember me</label>
         </div>
 
         <div class="text-sm leading-6">
-          <a id="forgot_password_lnk" class="font-semibold text-yellow-600 hover:text-indigo-500">Forgot password?</a>
+          <a id="forgot_password_lnk" class="font-semibold text-yellow-600 ">Forgot password?</a>
         </div>
       </div>
 
       <div>
-        <button type="submit" id="singin_btn" class="flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-md font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+        <button type="submit" id="singin_btn" class="flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-md font-semiboldtext-whiteh ">Sign in</button>
       </div>
 
       
     </form>
 
-    <p class="mt-4 text-center text-sm leading-6 text-gray-500">
+    <p class="mt-4 text-center text-sm  text-gray-500">
       Not a member?
-      <a href="#" id ="singup_now" class="font-semibold text-yellow-600 hover:text-indigo-500">Signup Now </a>
+      <a href="#" id ="singup_now" class="font-semibold text-yellow-600">Signup Now </a>
     </p>
 </div>
 </div>
 <div id="reset_password">
   <div>
 <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Shoes">
-<h2 class="mt-10 mb-10 text-center text-2xl font-bold leading-9 text-gray-900">Reset your password</h2>
+<h2 class="mt-10 mb-10 text-center text-2xl font-bold  text-gray-900">Reset your password</h2>
 </div>
 <form  id ="form_reset_password" class="space-y-6" action="actions.php?action=forgot_password" method="POST">
   
@@ -110,7 +110,7 @@ exit();
 
    
     <div class="relative mt-2 rounded-md shadow-sm">
-      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+      <div class=" flex items-center pl-3">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-gray-400">
           <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd" />
         </svg>
@@ -118,7 +118,7 @@ exit();
         
         
       </div>
-      <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6" placeholder="Email" required>
+      <input type="email" name="email" id="email" class="block w-full rounded-md border-0 py-3 pl-10 text-gray-900" placeholder="Email" required>
       
  
     </div>
@@ -128,7 +128,7 @@ exit();
 
 
  
-  <button id="forgot_password_btn" type="submit"  class="flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-md font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Retrive Password</button>
+  <button id="forgot_password_btn" type="submit"  class="flex w-full justify-center rounded-md bg-yellow-500 px-3 py-3 text-md font-semibold ">Retrive Password</button>
   
 </form><p class="mt-4 text-center text-sm leading-6 text-gray-500">
     Want to login?
