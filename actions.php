@@ -45,6 +45,7 @@ function login_checker($conn){
         $prev_user_id = $_SESSION["user_id"];
 
         $_SESSION["email"] = $email;
+        $_SESSION["user_id"] = $email;
         
 
         $json =  json_encode(array(
