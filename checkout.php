@@ -1,7 +1,7 @@
 <?php
     include "components/header.php";
     if (!isset($_SESSION["email"])) {
-        header("Location: auth.php");
+        header("Location: auth.php?from=checkout.php");
         exit();
     }
 

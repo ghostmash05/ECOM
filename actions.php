@@ -42,10 +42,10 @@ function login_checker($conn){
 
     if ($res->num_rows > 0){
 
-        $prev_user_id = $_SESSION["email"];
+        $prev_user_id = $_SESSION["user_id"];
 
         $_SESSION["email"] = $email;
-        $email = $_SESSION["email"];
+        
 
         $json =  json_encode(array(
             "status"=>"success",

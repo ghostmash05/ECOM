@@ -3,14 +3,17 @@
 
 $redirect = "dashboard.php";
 
-if(isset($GET["from"])){
+if(isset($_GET["from"])){
 
-  $redirect  = htmlspecialchars($GET["from"]);
+  $redirect  = htmlspecialchars($_GET["from"]);
+
+
 
 
 
 
 }
+
 
 if(isset($_SESSION["email"])){
 
