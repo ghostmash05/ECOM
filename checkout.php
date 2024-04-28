@@ -6,19 +6,22 @@
     }
 
   
-    $stmt = $conn->prepare("SELECT * FROM cart WHERE user_id = :email");
-    $stmt->bindParam(':email', $_SESSION['email']);
+    $stmt = $conn->prepare("SELECT * FROM cart WHERE user_id = ?");
+    $stmt->bind_param('s', $_SESSION['email']);
     $stmt->execute();
-    $result = $stmt->fetch();
+    $result_t = $stmt->get_result();
+    $result = $result_t->fetch_array(MYSQLI_ASSOC);
 
     if ($result) {
         $prodid = $result['product_id'];
         $quantity = $result['quantity'];
 
-        $stmt = $conn->prepare("SELECT * FROM products WHERE product_id = :prodid");
-        $stmt->bindParam(':prodid', $prodid);
+        $stmt = $conn->prepare("SELECT * FROM products WHERE product_id = ?");
+        $stmt->bind_param('s', $prodid);
         $stmt->execute();
-        $product = $stmt->fetch();
+
+        $product_res = $stmt->get_result();
+        $product = $product_res->fetch_array(MYSQLI_ASSOC);
         $title = $product['product_title'];
         $price = $product['price'];
 
@@ -43,6 +46,7 @@
         <p>Subtotal: <?=$subtotal?>&nbspTaka</p>
         <div class="delivary">
             <h2>Delivery Address</h2>
+
             <form action="process_order.php" method="POST">
                 <label for="address">Address:</label>
                 <input type="text" name="address" id="address" required><br><br>
@@ -54,17 +58,16 @@
                 <input type="text" name="state" id="state" required><br><br>
 
                 <label for="zip">ZIP Code:</label>
-                <input type="text" name="zip" id="zip" required><br><br>
+                <input type="text" name="zip_code" id="zip_code" required><br><br>
 
                 <label for="country">Country:</label>
                 <input type="text" name="country" id="country" required><br><br>
-            </form>
-        </div>
-        <div class="payment">
+
+                <div class="payment">
             <h2>Payment Method</h2>
-            <form action="process_order.php" method="POST">
+            
                 <label for="payment" class="payment">Select Payment Method:</label>
-                <select name="payment_opt" id="payment_opt" class="payment_opt">
+                <select name="payment_method" id="payment_method" class="payment_opt">
                     <option value="bkash">Bkash</option>
                     <option value="nagad">Nagad</option>
                     <option value="rocket">Rocket</option>
@@ -76,8 +79,13 @@
                 <div class="pay">
                     <button type="submit">Pay & Confirm</button>
                 </div>
-            </form>
+            
         </div>
+            </form>
+
+
+        </div>
+       
     </div>
 </body>
 </html>

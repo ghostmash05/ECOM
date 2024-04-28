@@ -42,12 +42,19 @@ function login_checker($conn){
 
     if ($res->num_rows > 0){
 
+        $prev_user_id = $_SESSION["email"];
+
         $_SESSION["email"] = $email;
+        $email = $_SESSION["email"];
 
         $json =  json_encode(array(
             "status"=>"success",
             "msg"=>"Logged in successfully",
         ));
+
+        $sql_for_cart = "UPDATE cart SET user_id = '$email' WHERE user_id = '$prev_user_id'";
+        
+        mysqli_query($conn, $sql_for_cart);
         return $json;
         
 
