@@ -5,8 +5,8 @@
         exit();
     }
 
-    $pdo = new PDO("mysql:host=localhost;dbname=ecom", "root", "");
-    $stmt = $pdo->prepare("SELECT * FROM cart WHERE user_id = :email");
+  
+    $stmt = $conn->prepare("SELECT * FROM cart WHERE user_id = :email");
     $stmt->bindParam(':email', $_SESSION['email']);
     $stmt->execute();
     $result = $stmt->fetch();
@@ -15,7 +15,7 @@
         $prodid = $result['product_id'];
         $quantity = $result['quantity'];
 
-        $stmt = $pdo->prepare("SELECT * FROM products WHERE product_id = :prodid");
+        $stmt = $conn->prepare("SELECT * FROM products WHERE product_id = :prodid");
         $stmt->bindParam(':prodid', $prodid);
         $stmt->execute();
         $product = $stmt->fetch();
