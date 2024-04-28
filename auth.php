@@ -7,6 +7,7 @@ if(isset($_GET["from"])){
 
   $redirect  = htmlspecialchars($_GET["from"]);
 
+  echo $redirect;
 
 
 
@@ -341,13 +342,15 @@ $.ajax({
     }
 
     else{
+
+      var redirect = "<?php echo $redirect; ?>";
       $("#login_alert_msg").removeClass("bg-orange-100 border-orange-500 text-orange-700");
 
       $("#login_alert_msg").addClass("bg-green-100 border-green-500 text-green-700");
       $("#login_alert_msg").show();
       $("#login_alert_msg").html(data["msg"] + ", Redirecting to dashboard");
       setTimeout(function() {
-        window.location.href = 'dashboard.php';
+        window.location.href = redirect;
       }, 2000);
      
     }
