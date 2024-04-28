@@ -23,15 +23,17 @@ body {
     text-decoration: none;
     color: #353b57;
     margin-right: 15px;
-    font-size: 16px;
+    font-size: 20px;
+    text-decoration: dashed;
     font-weight: 600;
     margin-top: 15px;
 }
 
 .nav-right {
     display: flex;
-    justify-content: left;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
     padding-right: 5px;
     margin-right: 10px;
     position: fixed;
@@ -40,9 +42,20 @@ body {
 }
 
 .nav-right a {
-    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    font-size: 30px;
     color: whitesmoke;
     margin-left: 25px;
+}
+
+.nav-right p {
+    font-size: 20px;
+    color: whitesmoke;
+    font-family: "Montserrat";
+    margin-left: 2px;
 }
 
 .color{
@@ -152,7 +165,7 @@ body {
     align-items: center;
     margin-top: 20px;
     position: fixed;
-    top: 80%;
+    bottom: 0%;
     right: 20%;
     z-index: 1;
     border-radius: 10px;
@@ -183,7 +196,7 @@ body {
     align-items: center;
     position: fixed;
     padding-left: 30px;
-    top: 88%;
+    bottom: 4%;
     right: 8%;
     z-index: 0;
     border-radius: 10px;

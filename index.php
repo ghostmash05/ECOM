@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" href="./../home.css">
+    <link rel="stylesheet" href="home.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
@@ -23,7 +23,6 @@
 
 
 
-echo $_SESSION["user_id"];
 $sql = "SELECT * FROM `products`";
 $query = mysqli_query($conn, $sql);
 $res = mysqli_fetch_array($query);
@@ -60,10 +59,10 @@ else{
 <body>
 <div class="color">
 <div id="cart_msg">
-<div aria-live="assertive" class="fixed flex items-end px-4 py-6">
-  <div class="flex w-full flex-col items-center space-y-4">
+<div aria-live="assertive" class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6">
+  <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
   
-    <div class=" w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ">
+    <div class="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
       <div class="p-4">
         <div class="flex items-start">
           <div class="flex-shrink-0">
@@ -76,7 +75,7 @@ else{
             <p id ="success_msg" class="mt-1 text-sm text-gray-500"></p>
           </div>
           <div class="ml-4 flex flex-shrink-0">
-            <button type="button" id="popup_btn" class="inline-flex rounded-md bg-white text-gray-400">
+            <button type="button" id="popup_btn" class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
               <span class="sr-only">Close</span>
               <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
@@ -91,9 +90,6 @@ else{
 </div>
                 <div class="nav-left">
                     <a href="#">Home</a>
-                    <a href="/about.php">About</a>
-                    <a href="/contact.php">Contact</a>
-                    
                 </div>
                 <div class="content">
                     <div class="social-media">
@@ -102,7 +98,7 @@ else{
                         <a href="#" class="social-link"><ion-icon name="logo-instagram"></ion-icon></a>
                     </div>
                     <h1>The Latest & The Greatest</h1>
-                    <h3><?=$product_title;?></h3>
+                    <h3>Men's Shoes</h3>
                     <p><?=$product_description;?>.</p>
 
                        <div class="size">
@@ -115,7 +111,10 @@ else{
                       </div>
 
                     <div class="photos">
-                        <img src="<?=$product_image;?>" alt="Nike Air Max 1 Premium" height="100px" width="75px">
+                        <img src="nike-air-max-1-pure-platinum-fd9081-001-release-date.jpg" alt="Nike Air Max 1 Premium" height="100px" width="75px">
+                        <img src="nike-air-max-1-pure-platinum-fd9081-001-release-date (1).jpg" alt="Nike Air Max 1 Premium" height="100px" width="75px">
+                        <img src="nike-air-max-1-pure-platinum-fd9081-001-release-date (2).jpg" alt="Nike Air Max 1 Premium" height="100px" width="75px">
+                        <img src="nike-air-max-1-pure-platinum-fd9081-001-release-date (3).jpg" alt="Nike Air Max 1 Premium" height="100px" width="75px">
                        
                     <div class="quantity">
                         <button id="decrease_btn">-</button>
@@ -127,7 +126,7 @@ else{
                 </div>
     </div>
     <div class="nav-right">
-        <a href="cart.php" ><ion-icon name="cart-outline"></ion-icon><p id="cart_total"> </p></a>
+        <a href="cart.php" ><ion-icon name="cart-outline"></ion-icon><p id="cart_total" class="cart_total"></p></a>
         <a href="auth.php"><ion-icon name="person-outline"></ion-icon></a>
     </div>
     <div class="item">
@@ -137,8 +136,8 @@ else{
         <img src="<?=$product_image;?>" alt="<?=$product_title;?>" height="600px" width="450px">
     </div>
     <div class="price">
-        <h3>$<?=$prev_price;?></h3>
-        <h2>$<?=$price;?></h2>
+        <h3>৳<?=$prev_price;?></h3>
+        <h2>৳<?=$price;?></h2>
     </div>
     <div class="cart">
 

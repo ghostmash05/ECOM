@@ -2,7 +2,7 @@
 <?php include_once "components/header.php";?>
 
 <div class="bg-white">
-  <div class="mx-auto max-w-full px-4 py-16 ">
+  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 ">
     <h1 class="text-center text-3xl font-bold  text-gray-900 "> Cart</h1>
 
     <form class="mt-12">
@@ -33,17 +33,21 @@
         </div>
 
         <div class="mt-10">
-          <button  class="w-full rounded-md border  bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm">Checkout</button>
+          
+        <button id="checkoutBtn" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">
+        <a href="checkout.php">Checkout</a>
+        </button>
+
         </div>
 
         <div class="mt-4">
-          <button id="clear_cart_btn" class="w-full rounded-md border border-transparent bg-red-600 px-4 py-3 text-base font-medium text-white shadow-sm">Delete cart</button>
+          <button id="clear_cart_btn" class="w-full rounded-md border border-transparent bg-red-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Delete cart</button>
         </div>
 
         <div class="mt-6 text-center text-sm">
           <p>
             or
-            <a href="/" class="font-medium text-indigo-600 hover:text-indigo-500">
+            <a href="index.php" class="font-medium text-indigo-600 hover:text-indigo-500">
               Continue Shopping
               <span aria-hidden="true"> &rarr;</span>
             </a>
@@ -66,16 +70,16 @@
 
   <li class="flex py-6">
     <div class="flex-shrink-0">
-      <img src="images/`+product_img+`" alt="Front side of mint cotton t-shirt with wavey lines pattern." class="h-24 w-24 rounded-md">
+      <img src="images/`+product_img+`" alt="Front side of mint cotton t-shirt with wavey lines pattern." class="h-24 w-24 rounded-md object-cover object-center sm:h-32 sm:w-32">
     </div>
 
-    <div class="ml-4 flex flex-1 flex-col">
+    <div class="ml-4 flex flex-1 flex-col sm:ml-6">
       <div>
         <div class="flex justify-between">
           <h4 class="text-sm">
             <a href="#" class="font-medium text-gray-700 hover:text-gray-800">`+product_title+`</a>
           </h4>
-          <p class="ml-4 text-sm font-medium text-gray-900"> $`+product_price+`</p>
+          <p class="ml-4 text-sm font-medium text-gray-900"> ৳`+product_price+`</p>
         </div>
 
         <p class="mt-1 border py-2 text-sm text-gray-500"> <input id="cart_quantity" data-product_id = `+product_id+` type="number" value="`+product_quantity+ `"></p>
@@ -96,13 +100,11 @@
       </div>
     </div>
   </li>
-       }
+       
        
 `;
 
 $("#product_list").append(temp_html);
-
-
 
 
 
@@ -248,6 +250,7 @@ $(document).on('change',"#cart_quantity",function(){
 
 
 })
+
 
 
     

@@ -1,0 +1,59 @@
+*{
+    margin: 5px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat';
+    background-image:url(profile.jpg);
+    background-size: cover;
+    overflow: hidden;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 40%;
+    width: 500px;
+    padding: 20px;
+    font-size: 18px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    backdrop-filter: blur(30px);
+    color: black;
+}
+
+.card h2 {
+    margin-bottom: 20px;
+    align-self: center;
+    font-size: 30px;
+    color: black;
+    ;
+}
+
+.home{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding-left:15px;
+    margin-left: 10px;
+    position: fixed;
+    top: 2vh;
+    left: 2vw;
+    font-size: 40px;
+   
+    ion-icon{
+        color: black;
+    }
+}
