@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2024 at 01:04 PM
+-- Generation Time: Apr 28, 2024 at 10:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -39,8 +39,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `quantity`) VALUES
-(22, '662151a7457ed', 1, 1),
-(31, '662153bb1d410', 1, 1);
+(49, 'shaongit@gmail.com', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -56,6 +55,18 @@ CREATE TABLE `ordered_items` (
   `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `ordered_items`
+--
+
+INSERT INTO `ordered_items` (`order_items_id`, `product_id`, `order_id`, `quantity`, `price`) VALUES
+(3, 1, 13, 1, 120),
+(4, 1, 14, 1, 120),
+(5, 1, 15, 1, 120),
+(6, 1, 16, 3, 120),
+(7, 1, 19, 2, 240),
+(8, 1, 20, 2, 240);
+
 -- --------------------------------------------------------
 
 --
@@ -66,8 +77,39 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_email` varchar(255) NOT NULL,
   `order_date` date NOT NULL DEFAULT current_timestamp(),
-  `total_price` int(11) NOT NULL
+  `address` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `payment_method` varchar(255) NOT NULL,
+  `order_status` enum('pending','delivered','rejected','cancelled') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_email`, `order_date`, `address`, `city`, `country`, `payment_method`, `order_status`) VALUES
+(1, 'shaongit@gmail.com', '2024-04-28', 'dhaka', 'NG', 'bangladeesh', 'cod', 'pending'),
+(2, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(3, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(4, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(5, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(6, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(7, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(8, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(9, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(10, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(11, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(12, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(13, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka ', 'Bangladesh', 'bkash', 'pending'),
+(14, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka ', 'Bangladesh', 'bkash', 'pending'),
+(15, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka ', 'Bangladesh', 'bkash', 'pending'),
+(16, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(17, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(18, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(19, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(20, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka 1204', 'Bangladesh', 'bkash', 'pending'),
+(21, '662eabb05a212', '2024-04-28', 'Gabtoli,Savar', ' Dhaka', 'Bangladesh', 'bkash', 'pending');
 
 -- --------------------------------------------------------
 
@@ -115,7 +157,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`full_name`, `username`, `email`, `password`, `phone`, `registered_at`, `token`, `token_expire`) VALUES
 ('adad', 'shaongit13@gmail.com', 'shaongit13a@gmail.com', 'd722dbcb93d6ca952b49928b37cac8e1', '231', '2024-04-17 07:31:09', '', '0000-00-00 00:00:00'),
 ('Garbage Truck', 'rabbi12', 'shaongit14@gmail.com', '4eae35f1b35977a00ebd8086c259d4c9', '8678583', '2024-04-18 11:54:49', '', '0000-00-00 00:00:00'),
-('Siam', 'shaongit', 'shaongit@gmail.com', 'd722dbcb93d6ca952b49928b37cac8e1', '01783473344', '2024-04-17 07:31:09', '28f722078aef914368297385b233eb2ecac28177', '2024-04-18 12:19:08'),
+('Siam', 'shaongit', 'shaongit@gmail.com', 'bcedc450f8481e89b1445069acdc3dd9', '01783473344', '2024-04-17 07:31:09', '28f722078aef914368297385b233eb2ecac28177', '2024-04-18 12:19:08'),
 ('siam', 'wtf', 'shha@gmail.com', 'f1290186a5d0b1ceab27f4e77c0c5d68', '01', '2024-04-17 07:31:09', '', '0000-00-00 00:00:00'),
 ('Siam', 'siam', 'siamsiamsiam@gmail.com', 'wow123', '0178732211', '2024-04-17 07:31:09', '', '0000-00-00 00:00:00');
 
@@ -164,13 +206,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `ordered_items`
 --
 ALTER TABLE `ordered_items`
-  MODIFY `order_items_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_items_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `products`
