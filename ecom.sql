@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
 -- Generation Time: Apr 30, 2024 at 05:08 AM
+=======
+-- Generation Time: Apr 28, 2024 at 10:06 PM
+>>>>>>> 1fa0ea43fa90a13d0f8dda22f8a5bcfa8ddedf8b
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -65,6 +69,7 @@ INSERT INTO `ordered_items` (`order_items_id`, `product_id`, `order_id`, `quanti
 (5, 1, 15, 1, 120),
 (6, 1, 16, 3, 120),
 (7, 1, 19, 2, 240),
+<<<<<<< HEAD
 (8, 1, 20, 2, 240),
 (9, 1, 22, 4, 8400),
 (10, 1, 23, 3, 6300),
@@ -74,6 +79,9 @@ INSERT INTO `ordered_items` (`order_items_id`, `product_id`, `order_id`, `quanti
 (14, 1, 27, 2, 4200),
 (15, 1, 28, 3, 6300),
 (16, 2, 29, 1, 5500);
+=======
+(8, 1, 20, 2, 240);
+>>>>>>> 1fa0ea43fa90a13d0f8dda22f8a5bcfa8ddedf8b
 
 -- --------------------------------------------------------
 
@@ -89,7 +97,11 @@ CREATE TABLE `orders` (
   `city` varchar(255) NOT NULL,
   `country` varchar(255) NOT NULL,
   `payment_method` varchar(255) NOT NULL,
+<<<<<<< HEAD
   `order_status` enum('Pending','Delivered','Rejected','Cancelled') NOT NULL
+=======
+  `order_status` enum('pending','delivered','rejected','cancelled') NOT NULL
+>>>>>>> 1fa0ea43fa90a13d0f8dda22f8a5bcfa8ddedf8b
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -97,6 +109,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `user_email`, `order_date`, `address`, `city`, `country`, `payment_method`, `order_status`) VALUES
+<<<<<<< HEAD
 (1, 'shaongit@gmail.com', '2024-04-28', 'dhaka', 'NG', 'bangladeesh', 'cod', 'Pending'),
 (2, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'Pending'),
 (3, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'Pending'),
@@ -126,6 +139,29 @@ INSERT INTO `orders` (`order_id`, `user_email`, `order_date`, `address`, `city`,
 (27, 'mjs80116@gmail.com', '2024-04-30', 'Kanchan Bridge', ' Narayanganj', 'Bangladesh', 'COD', 'Pending'),
 (28, 'mjs80116@gmail.com', '2024-04-30', 'Kanchan Bridge', ' Narayanganj', 'Bangladesh', 'Bkash', 'Pending'),
 (29, 'mjs80116@gmail.com', '2024-04-30', 'Alexander', ' Lakshmipur', 'Bangladesh', 'COD', 'Pending');
+=======
+(1, 'shaongit@gmail.com', '2024-04-28', 'dhaka', 'NG', 'bangladeesh', 'cod', 'pending'),
+(2, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(3, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(4, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(5, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(6, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(7, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(8, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(9, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(10, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(11, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(12, 'shaongit@gmail.com', '2024-04-28', 'Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(13, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka ', 'Bangladesh', 'bkash', 'pending'),
+(14, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka ', 'Bangladesh', 'bkash', 'pending'),
+(15, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka ', 'Bangladesh', 'bkash', 'pending'),
+(16, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(17, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(18, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(19, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka', 'Bangladesh', 'bkash', 'pending'),
+(20, 'shaongit@gmail.com', '2024-04-28', 'Dhanmondi 27 Dhaka', ' Dhaka 1204', 'Bangladesh', 'bkash', 'pending'),
+(21, '662eabb05a212', '2024-04-28', 'Gabtoli,Savar', ' Dhaka', 'Bangladesh', 'bkash', 'pending');
+>>>>>>> 1fa0ea43fa90a13d0f8dda22f8a5bcfa8ddedf8b
 
 -- --------------------------------------------------------
 
@@ -228,19 +264,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
+<<<<<<< HEAD
   MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+=======
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+>>>>>>> 1fa0ea43fa90a13d0f8dda22f8a5bcfa8ddedf8b
 
 --
 -- AUTO_INCREMENT for table `ordered_items`
 --
 ALTER TABLE `ordered_items`
+<<<<<<< HEAD
   MODIFY `order_items_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+=======
+  MODIFY `order_items_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+>>>>>>> 1fa0ea43fa90a13d0f8dda22f8a5bcfa8ddedf8b
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
+<<<<<<< HEAD
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+=======
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+>>>>>>> 1fa0ea43fa90a13d0f8dda22f8a5bcfa8ddedf8b
 
 --
 -- AUTO_INCREMENT for table `products`

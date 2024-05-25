@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *{
     margin: 5px;
     padding: 0;
@@ -83,3 +84,90 @@ button{
     cursor: pointer;
 }
 
+=======
+*{
+    margin: 5px;
+    padding: 0;
+    font-family: 'Montserrat';
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+p{
+    font-weight: 500;
+    color: black;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    width: 400px;
+}
+
+.delivary h2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.delivary input {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.payment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
+
+.payment_opt{
+    margin-top: 10px;
+    padding: 10px;
+    width: 105%;
+    border: 1px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 5px;
+}
+
+.pay{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button{
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+>>>>>>> 1fa0ea43fa90a13d0f8dda22f8a5bcfa8ddedf8b
