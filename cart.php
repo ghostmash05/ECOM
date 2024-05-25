@@ -33,7 +33,11 @@
         </div>
 
         <div class="mt-10">
-          <button  class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">Checkout</button>
+          
+        <button id="checkoutBtn" class="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">
+        <a href="checkout.php">Checkout</a>
+        </button>
+
         </div>
 
         <div class="mt-4">
@@ -43,7 +47,7 @@
         <div class="mt-6 text-center text-sm">
           <p>
             or
-            <a href="/" class="font-medium text-indigo-600 hover:text-indigo-500">
+            <a href="index.php" class="font-medium text-indigo-600 hover:text-indigo-500">
               Continue Shopping
               <span aria-hidden="true"> &rarr;</span>
             </a>
@@ -75,7 +79,7 @@
           <h4 class="text-sm">
             <a href="#" class="font-medium text-gray-700 hover:text-gray-800">`+product_title+`</a>
           </h4>
-          <p class="ml-4 text-sm font-medium text-gray-900"> $`+product_price+`</p>
+          <p class="ml-4 text-sm font-medium text-gray-900"> ৳`+product_price+`</p>
         </div>
 
         <p class="mt-1 border py-2 text-sm text-gray-500"> <input id="cart_quantity" data-product_id = `+product_id+` type="number" value="`+product_quantity+ `"></p>
@@ -96,13 +100,11 @@
       </div>
     </div>
   </li>
-       }
+       
        
 `;
 
 $("#product_list").append(temp_html);
-
-
 
 
 
@@ -248,6 +250,7 @@ $(document).on('change',"#cart_quantity",function(){
 
 
 })
+
 
 
     

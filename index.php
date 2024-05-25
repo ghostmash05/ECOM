@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" href="./../home.css">
+    <link rel="stylesheet" href="home.css">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
@@ -21,10 +21,11 @@
  
 <?php include_once "components/header.php";
 
+$product_id = 1;
 
 
-echo $_SESSION["user_id"];
-$sql = "SELECT * FROM `products`";
+
+$sql = "SELECT * FROM `products` WHERE product_id = $product_id";
 $query = mysqli_query($conn, $sql);
 $res = mysqli_fetch_array($query);
 
@@ -32,11 +33,13 @@ $res = mysqli_fetch_array($query);
 
 if(mysqli_num_rows($query)>0){
 
-
-    $product_id = (int)$res["product_id"];
     $product_title = $res["product_title"];
     $product_description = $res["product_description"];
     $product_image = 'images/'.$res['product_image'];
+    $showcase1 = $res['showcase1'];
+    $showcase2 = $res['showcase2'];
+    $showcase3 = $res['showcase3'];
+    $showcase4 = $res['showcase4'];
     $price = (int)$res["price"];
     $prev_price = (int)$res["prev_price"];
 
@@ -91,9 +94,6 @@ else{
 </div>
                 <div class="nav-left">
                     <a href="#">Home</a>
-                    <a href="/about.php">About</a>
-                    <a href="/contact.php">Contact</a>
-                    
                 </div>
                 <div class="content">
                     <div class="social-media">
@@ -102,7 +102,11 @@ else{
                         <a href="#" class="social-link"><ion-icon name="logo-instagram"></ion-icon></a>
                     </div>
                     <h1>The Latest & The Greatest</h1>
-                    <h3><?=$product_title;?></h3>
+                    <div class="arrows">
+                      <button id="back"><ion-icon name="arrow-back-outline"></ion-icon></button>
+                      <button id="forward"><ion-icon name="arrow-forward-outline"></ion-icon></button>
+                    </div>
+                    <h3>Men's Shoes</h3>
                     <p><?=$product_description;?>.</p>
 
                        <div class="size">
@@ -115,7 +119,10 @@ else{
                       </div>
 
                     <div class="photos">
-                        <img src="<?=$product_image;?>" alt="Nike Air Max 1 Premium" height="100px" width="75px">
+                        <img src=<?=$showcase1?> alt="Nike Air Max 1 Premium" height="100px" width="75px">
+                        <img src=<?=$showcase2?> alt="Nike Air Max 1 Premium" height="100px" width="75px">
+                        <img src=<?=$showcase3?> alt="Nike Air Max 1 Premium" height="100px" width="75px">
+                        <img src=<?=$showcase4?> alt="Nike Air Max 1 Premium" height="100px" width="75px">
                        
                     <div class="quantity">
                         <button id="decrease_btn">-</button>
@@ -127,7 +134,7 @@ else{
                 </div>
     </div>
     <div class="nav-right">
-        <a href="cart.php" ><ion-icon name="cart-outline"></ion-icon><p id="cart_total"> </p></a>
+        <a href="cart.php" ><ion-icon name="cart-outline"></ion-icon><p id="cart_total" class="cart_total"></p></a>
         <a href="auth.php"><ion-icon name="person-outline"></ion-icon></a>
     </div>
     <div class="item">
@@ -137,8 +144,8 @@ else{
         <img src="<?=$product_image;?>" alt="<?=$product_title;?>" height="600px" width="450px">
     </div>
     <div class="price">
-        <h3>$<?=$prev_price;?></h3>
-        <h2>$<?=$price;?></h2>
+        <h3>৳<?=$prev_price;?></h3>
+        <h2>৳<?=$price;?></h2>
     </div>
     <div class="cart">
 
@@ -153,6 +160,7 @@ else{
 
 
 <script>
+  
     $(document).ready(function(){
         $("#cart_msg").hide();
        
@@ -261,11 +269,7 @@ $("#add_to_cart_btn").click(function(){
 
 })
 
-    
-
-    
-
-
     })
+    
 </script>
 
